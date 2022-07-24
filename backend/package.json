@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "express": "^4.18.1",
+    "nodemon": "^2.0.19"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "online-voting-system",
+  "version": "1.0.0",
+  "main": "server.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amirpoudel/college-project-minor.git"
+  },
+  "author": "Amir Poudel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amirpoudel/college-project-minor/issues"
+  },
+  "homepage": "https://github.com/amirpoudel/college-project-minor#readme",
+  "description": ""
+}
