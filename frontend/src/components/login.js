@@ -2,6 +2,7 @@
 import React,{useState} from 'react';
 import './login.css';
 import PropTypes from 'prop-types';
+import axios from 'axios'
 
 export default function Login(props) {
     let [user,setUser] = useState({
@@ -15,8 +16,24 @@ export default function Login(props) {
         
         setUser({...user,[name]:value});
     }
+
+    async function postData(){
+        const config = {
+            method:'post',
+            url:'/userLogin',
+            data:user
+        }
+
+        axios(config).then(function(res){
+            console.log(res);
+            
+        }).catch(function(err){
+            console.log(err);
+        })
+    }
+
     const handleOnClick = ()=>{
-        console.log(`Username is ${user}`);
+        postData();
     }
     return (
         <>  
@@ -31,7 +48,6 @@ export default function Login(props) {
                 <br />
                 <br />
                 <button type="submit" defaultValue="Submit" onClick={handleOnClick} >Submit</button>
-
 
             </div>
         </>

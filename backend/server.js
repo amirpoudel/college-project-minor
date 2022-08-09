@@ -1,6 +1,10 @@
 const database = require('./database/database');
+const bodyParser = require('body-parser');
 const express = require('express');
+const { response } = require('express');
 const app = express();
+//app.use(bodyParser.json());
+const axios = require('axios').default;
 
 const port = 5000;
 
@@ -52,6 +56,17 @@ database.updateCandidateVotes();
 app.get("/",(req,res)=>{
     res.send("Hello world");
 })
+
+
+app.post("/userLogin",(req,res)=>{
+    const data = req.body;
+    console.log(data);
+    
+    res.sendStatus(200);
+})
+
+
+
 
 app.listen(port,()=>{
     console.log(`listen at ${port}`);
