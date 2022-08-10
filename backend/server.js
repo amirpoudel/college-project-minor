@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const { response } = require('express');
 const app = express();
-//app.use(bodyParser.json());
+app.use(bodyParser.json());
 const axios = require('axios').default;
 
 const port = 5000;
@@ -58,11 +58,24 @@ app.get("/",(req,res)=>{
 })
 
 
-app.post("/userLogin",(req,res)=>{
-    const data = req.body;
+app.post("/userLogin",async (req,res)=>{
+    const data = await req.body;
     console.log(data);
     
     res.sendStatus(200);
+})
+
+app.post("/adminRegistration",async(req,res)=>{
+    const data = await req.body;
+    
+    if(data.password == data.confirmPassword){
+        database.createAdmin(data.firstName,data.middleName,data.lastName,data.email,data.password);
+        console.log(data);
+        res.sendStatus(200);
+    }else{
+        res.send(500);
+    }
+    
 })
 
 

@@ -9,9 +9,10 @@ export default function Home() {
         <div className='home'>
 
 
-            <div>Welcome To Online Voting System</div>
-            <Link to='/userLogin'>User Login</Link>
-            <Link to='/adminLogin'>Admin Login</Link>
+            <div >Welcome To Online Voting System</div>
+            <Link to='/userLogin'>User Login</Link><br/>
+            <Link to='/adminLogin'>Admin Login</Link><br/>
+            <Link to='/adminRegistration'>Admin Registration</Link>
         </div>
         
     </>
