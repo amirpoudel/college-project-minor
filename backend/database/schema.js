@@ -47,7 +47,12 @@ const userSchema = new Schema({
     password:{
         type:String,
         required:true
+    },
+    isVoted:{
+        type:Boolean,
+        required:true
     }
+
 })
 
 

@@ -31,11 +31,11 @@ export default function AdminRegistration() {
             console.log(res);
             
             
-            
+   
         }).catch(function(err){
             console.log(err);
             console.log(err.response.status)
-            if(err.response.status==500){
+            if(err.response.status===500){
                 alert("Password Doesnot Match");
             }
         })

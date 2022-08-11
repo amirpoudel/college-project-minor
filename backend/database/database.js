@@ -47,7 +47,8 @@ async function createUser(voterID,firstName,middleName,lastName,email,password) 
             middleName: middleName,
             lastName: lastName,
             email: email,
-            password: password
+            password: password,
+            isVoted:false
         })
         await user.save();
     } catch (error) {

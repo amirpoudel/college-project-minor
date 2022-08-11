@@ -65,6 +65,12 @@ app.post("/userLogin",async (req,res)=>{
     res.sendStatus(200);
 })
 
+app.post("/adminLogin",async(req,res)=>{
+    const data = await req.body;
+    console.log(data);
+    res.sendStatus(200);
+})
+
 app.post("/adminRegistration",async(req,res)=>{
     const data = await req.body;
     
@@ -77,6 +83,28 @@ app.post("/adminRegistration",async(req,res)=>{
     }
     
 })
+
+app.post("/userRegistration",async(req,res)=>{
+    const data = await req.body;
+    if(data.password == data.confirmPassword){
+        database.createUser(data.votingID,data.firstName,data.middleName,data.lastName,data.email,data.password);
+        console.log(data);
+        res.sendStatus(200);
+    }else{
+        res.send(500);
+    }
+})
+
+
+app.post("/candidateRegistration",async(req,res)=>{
+    const data = await req.body;
+
+    database.createCandidate(data.candidateID,data.firstName,data.middleName,data.lastName,data.post);
+    console.log(data);
+    console.log(data.candidateID);
+})
+
+
 
 
 

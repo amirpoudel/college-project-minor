@@ -1,11 +1,11 @@
 
 import React,{useState} from 'react';
-import './login.css';
-import PropTypes from 'prop-types';
+import './adminLogin.css';
+
 import axios from 'axios'
 
 export default function Login(props) {
-    let [user,setUser] = useState({
+    let [admin,setAdmin] = useState({
         username:"",
         password:""
     });
@@ -14,14 +14,14 @@ export default function Login(props) {
         name = event.target.name; // this is store name of tag in input field
         value = event.target.value;//this is store value of that particular field
         
-        setUser({...user,[name]:value});
+        setAdmin({...admin,[name]:value});
     }
 
     async function postData(){
         const config = {
             method:'post',
-            url:'/userLogin',
-            data:user
+            url:'/adminLogin',
+            data:admin
         }
 
         axios(config).then(function(res){
@@ -38,13 +38,13 @@ export default function Login(props) {
     return (
         <>  
             <div className='login'>
-                <h3>{props.title} Login</h3>
+                <h3>Admin Login</h3>
                 <label htmlFor="username">Username:</label>
-                <input type="text" id="username" name="username" value={user.username} onChange={handleOnChange}/>
+                <input type="email" id="username" name="username" value={admin.username} onChange={handleOnChange}/>
                 <br />
                 <br />
                 <label htmlFor="password">Password:</label>
-                <input type="password" id="password" name="password" value={user.password} onChange={handleOnChange} />
+                <input type="password" id="password" name="password" value={admin.password} onChange={handleOnChange} />
                 <br />
                 <br />
                 <button type="submit" defaultValue="Submit" onClick={handleOnClick} >Submit</button>
@@ -53,5 +53,3 @@ export default function Login(props) {
         </>
     )
 }
-
-Login.propTypes={title:PropTypes.string.isRequired};
