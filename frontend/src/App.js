@@ -1,6 +1,6 @@
 
 import './App.css';
-import Login from './components/user/login';
+import Login from './components/user/userLogin';
 import AdminLogin from './components/admin/adminLogin';
 import AdminRegistration from './components/admin/adminRegistration';
 import Home from './components/home';

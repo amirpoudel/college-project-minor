@@ -15,10 +15,12 @@ const adminSchema = new Schema({
     },
     email:{
         type:String,
-        required:true
+        required:true,
+        unique:true,
     },
     password:{
         type:String,
+        minlength:6,
         required:true
     }
 
@@ -29,6 +31,7 @@ const adminSchema = new Schema({
 const userSchema = new Schema({
     voterID:{
         type:Number,
+        unique:true,
         required:true,
     },
     firstName  :{
@@ -42,10 +45,12 @@ const userSchema = new Schema({
     },
     email:{
         type:String,
+        unique:true,
         required:true
     },
     password:{
         type:String,
+        minlength:6,
         required:true
     },
     isVoted:{
@@ -61,6 +66,7 @@ const userSchema = new Schema({
 const candidateSchema = new Schema({
     candidateID:{
         type:Number,
+        unique:true,
         required:true
     },
     firstName  :{

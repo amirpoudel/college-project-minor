@@ -25,7 +25,7 @@ export default function Login(props) {
         }
 
         axios(config).then(function(res){
-            console.log(res);
+            console.log(res.data.message)
             
         }).catch(function(err){
             console.log(err);

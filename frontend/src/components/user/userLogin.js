@@ -25,15 +25,19 @@ export default function Login(props) {
         }
 
         axios(config).then(function(res){
-            console.log(res);
+            
+            console.log(res.data.message)
+            console.log(res.data.token)
             
         }).catch(function(err){
+            console.log(err.response.data.message)
             console.log(err);
         })
     }
 
     const handleOnClick = ()=>{
         postData();
+        
     }
     return (
         <>  

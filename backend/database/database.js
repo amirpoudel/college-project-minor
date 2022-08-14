@@ -103,6 +103,14 @@ async function getDocuments() {
 
 }
 
+
+//find admin by username(Email)
+async function findOneAdmin(email){
+    const result = await models.adminModel.findOne({email:email})
+    return result;
+}
+
+
 // finds all votes
 async function findAllVotes() {
     const result = await models.voteModel.find();
@@ -127,6 +135,14 @@ async function findUsers() {
     const result = await models.userModel.find();
     return result;
 }
+
+//find user
+
+async function findOneUser(email){
+    const result = await models.userModel.findOne({email:email});
+    return result;
+}
+
 
 //update data in models
 
@@ -190,6 +206,8 @@ module.exports = {
     findAllCandidates: findAllCandidates,
     findCandidate: findCandidate,
     findUsers: findUsers,
+    findOneUser:findOneUser,
+    findOneAdmin:findOneAdmin,
 
 
     //update candidate votes
