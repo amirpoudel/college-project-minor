@@ -136,11 +136,20 @@ async function findUsers() {
     return result;
 }
 
-//find user
+//find user by email
 
 async function findOneUser(email){
     const result = await models.userModel.findOne({email:email});
     return result;
+}
+
+//find user by ID
+
+async function findOneUserById(id){
+
+    const result = await models.userModel.findById(id,"-password");//this "-password" parameter doesnot return password from database;
+    return result;
+  
 }
 
 
@@ -207,6 +216,7 @@ module.exports = {
     findCandidate: findCandidate,
     findUsers: findUsers,
     findOneUser:findOneUser,
+    findOneUserById:findOneUserById,
     findOneAdmin:findOneAdmin,
 
 

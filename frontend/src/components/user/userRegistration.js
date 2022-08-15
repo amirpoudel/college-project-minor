@@ -1,9 +1,10 @@
 import React,{useState} from 'react'
 import axios from 'axios';
 import './userRegistration.css';
+import {useNavigate} from "react-router-dom"
 export default function UserRegistration() {
 
-
+    const history = useNavigate();
     const [user,setUser]=useState({
         votingID:"",
         firstName:"",
@@ -28,9 +29,11 @@ export default function UserRegistration() {
             data:user
         }
         axios(config).then(function(res){
+
             console.log(res);
-            
-            
+            history("/userLogin");
+
+
    
         }).catch(function(err){
             console.log(err);
@@ -41,7 +44,8 @@ export default function UserRegistration() {
         })
     }
 
-    const handleOnClick=()=>{
+    const handleOnClick=(event)=>{
+        event.preventDefault();
         postData();
     }
 

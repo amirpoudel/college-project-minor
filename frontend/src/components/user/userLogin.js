@@ -3,8 +3,10 @@ import React,{useState} from 'react';
 import './login.css';
 import PropTypes from 'prop-types';
 import axios from 'axios'
+import {useNavigate} from "react-router-dom"
 
 export default function Login(props) {
+    const history = useNavigate();
     let [user,setUser] = useState({
         username:"",
         password:""
@@ -16,7 +18,7 @@ export default function Login(props) {
         
         setUser({...user,[name]:value});
     }
-
+    
     async function postData(){
         const config = {
             method:'post',
@@ -28,6 +30,8 @@ export default function Login(props) {
             
             console.log(res.data.message)
             console.log(res.data.token)
+            history("/user");
+            
             
         }).catch(function(err){
             console.log(err.response.data.message)
