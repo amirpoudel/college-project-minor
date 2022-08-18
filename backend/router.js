@@ -21,13 +21,29 @@ router.post("/adminLogin",adminController.adminLogin);
 //managge Admin Registration
 router.post("/adminRegistration",adminController.adminRegistration)
 
+//manage admin after admin login
 
+router.get('/admin',adminController.verifyToken,adminController.getAdmin);
+
+
+
+
+
+
+//Manage User Registration
+router.post("/userRegistration",userController.userRegistration)
 
 //manage user Login
 router.post("/userLogin",userController.userLogin)
 
-//Manage User Registration
-router.post("/userRegistration",userController.userRegistration)
+// manage after user Login
+router.get("/user",userController.verifyToken,userController.getUser);
+
+// refresh user token
+router.get("/refresh",userController.refreshToken,userController.verifyToken,userController.getUser);
+
+// user logout
+router.post("/logout",userController.verifyToken,userController.logout);
 
 //manage Candidate Registration
 router.post("/candidateRegistration",async(req,res)=>{

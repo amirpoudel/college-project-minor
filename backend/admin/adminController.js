@@ -3,6 +3,9 @@ const database = require("../database/database");
 
 const bcrypt = require('bcrypt');
 
+require("dotenv").config();
+
+const jwt = require('jsonwebtoken');
 
 const saltRounds = 10;
 
@@ -45,19 +48,75 @@ const adminLogin = async(req,res)=>{
 
     bcrypt.compare(data.password,existingAdmin.password,function(err,result){
         if(result === true){
-            return res.status(200).json({message:'Successfully Logged In'});
+
+            //when login successfull create jwt token
+
+            
+            const token = jwt.sign({id:existingAdmin._id},process.env.TOKEN_PRIVATE_KEY,{expiresIn:"30s"})
+
+
+            //store token in httpOnly cookies
+            res.cookie(String(existingAdmin._id),token,{
+                path:"/",
+                expires:new Date(Date.now()+1000*30),
+                httpOnly:true,
+                sameSite:'lax'
+            })
+
+
+            return res.status(200).json({message:"Login Success",token});
         }else{
             return res.status(400).json({message:'Invalid Email or Password'})
         }
     })
 
-
-
-
-
-    
     
    
+}
+
+
+const verifyToken = (req,res,next)=>{
+    const cookies = req.headers.cookie;//cookie from front end;
+    let token;//extract token from cookies;
+    //check type of token is string or not
+    if(typeof cookies ==='string'){
+        token = cookies.split("=")[1];
+    }
+    
+    if(!token){
+        res.status(400).json({message:"No Token found"})
+    }
+
+    jwt.verify(String(token),process.env.TOKEN_PRIVATE_KEY,(err,decode)=>{
+        if(err){
+            return res.status(400).json({message:"Invalid Token"})
+        }
+
+        req.id = decode.id;
+        console.log(token)
+        console.log(res.id);// test
+        next();
+
+    })
+}
+
+
+
+const getAdmin = async (req,res)=>{
+    const adminID = req.id;
+    console.log(adminID);
+    let admin;
+    try{
+        admin = await database.findOneAdminById(adminID);
+        console.log(admin);
+    } catch(error){
+        return new Error(error);
+    }
+
+    if(!admin){
+         return res.status(404).json({message:"User Not Found"})
+    }
+    return res.status(200).json({admin});
 }
 
 
@@ -70,4 +129,6 @@ const adminLogin = async(req,res)=>{
 module.exports = {
     adminLogin:adminLogin,
     adminRegistration:adminRegistration,
+    getAdmin:getAdmin,
+    verifyToken:verifyToken,
 }

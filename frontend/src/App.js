@@ -1,15 +1,19 @@
-
+import React from 'react'
 import './App.css';
 import Login from './components/user/userLogin';
 import User from './components/user/user';
+import Admin from './components/admin/admin';
 import AdminLogin from './components/admin/adminLogin';
 import AdminRegistration from './components/admin/adminRegistration';
 import Home from './components/home';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import UserRegistration from './components/user/userRegistration';
 import CandidateRegistration from './components/candidate/candidateRegistration';
+import { useSelector } from 'react-redux';
 
 function App() {
+ 
+ 
   return (
     <>
       <BrowserRouter>
@@ -23,6 +27,8 @@ function App() {
           <Route extact path='/userRegistration' element={<UserRegistration/>}/>
           <Route exact path='/candidateRegistration' element={<CandidateRegistration/>}/>
           <Route extact path='/user' element={<User/>}/>
+          <Route extact path='/admin' element={<Admin/>}/>
+          
         </Routes>
 
       </BrowserRouter>

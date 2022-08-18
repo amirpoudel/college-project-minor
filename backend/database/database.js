@@ -110,6 +110,14 @@ async function findOneAdmin(email){
     return result;
 }
 
+//find admin by id
+async function findOneAdminById(id){
+
+    const result = await models.adminModel.findById(id,"-password");//this "-password" parameter doesnot return password from database;
+    return result;
+  
+}
+
 
 // finds all votes
 async function findAllVotes() {
@@ -218,6 +226,7 @@ module.exports = {
     findOneUser:findOneUser,
     findOneUserById:findOneUserById,
     findOneAdmin:findOneAdmin,
+    findOneAdminById:findOneAdminById,
 
 
     //update candidate votes

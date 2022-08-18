@@ -1,10 +1,14 @@
 
 import React,{useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import './adminLogin.css';
 
 import axios from 'axios'
 
+
+
 export default function Login(props) {
+    const navigate = useNavigate();
     let [admin,setAdmin] = useState({
         username:"",
         password:""
@@ -25,7 +29,9 @@ export default function Login(props) {
         }
 
         axios(config).then(function(res){
-            console.log(res.data.message)
+            console.log(res.data.message);
+            console.log(res.data.token);
+            navigate('/admin');
             
         }).catch(function(err){
             console.log(err);
