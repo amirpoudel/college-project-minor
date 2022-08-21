@@ -31,7 +31,7 @@ export default function UserRegistration() {
         axios(config).then(function(res){
 
             console.log(res);
-            history("/userLogin");
+            
 
 
    
@@ -46,7 +46,9 @@ export default function UserRegistration() {
 
     const handleOnClick=(event)=>{
         event.preventDefault();
-        postData();
+        postData().then(()=>{
+            history("/admin");
+        });
     }
 
 

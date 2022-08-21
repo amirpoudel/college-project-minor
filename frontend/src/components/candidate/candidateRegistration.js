@@ -1,9 +1,10 @@
 import React,{useState} from 'react';
 import axios from 'axios';
 import './candidateRegistration.css';
+import { useNavigate } from 'react-router-dom';
 
 export default function CandidateRegistration() {
-
+    const history = useNavigate();
     const [candidate,setCandidate]=useState({
         candidateID:"",
         firstName:"",
@@ -29,6 +30,7 @@ export default function CandidateRegistration() {
             console.log(res);
             
             
+            
    
         }).catch(function(err){
             console.log(err);
@@ -40,7 +42,10 @@ export default function CandidateRegistration() {
     }
 
     const handleOnClick=()=>{
-        postData();
+        postData().then(()=>{
+            alert("Register Success");
+            history('/admin');
+        });
     }
 
   return (

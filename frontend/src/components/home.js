@@ -16,8 +16,8 @@ export default function Home() {
             <Link to='/userLogin'>User Login</Link><br/>
             <Link to='/adminLogin'>Admin Login</Link><br/>
             <Link to='/adminRegistration'>Admin Registration</Link><br/>
-            <Link to='/userRegistration'>User Registration</Link><br/>
-            <Link to='/candidateRegistration'>Candidate Registration</Link><br/>
+            
+            
 
          
            

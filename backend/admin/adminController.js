@@ -52,13 +52,13 @@ const adminLogin = async(req,res)=>{
             //when login successfull create jwt token
 
             
-            const token = jwt.sign({id:existingAdmin._id},process.env.TOKEN_PRIVATE_KEY,{expiresIn:"30s"})
+            const token = jwt.sign({id:existingAdmin._id},process.env.TOKEN_PRIVATE_KEY,{expiresIn:"1h"})
 
 
             //store token in httpOnly cookies
             res.cookie(String(existingAdmin._id),token,{
                 path:"/",
-                expires:new Date(Date.now()+1000*30),
+                expires:new Date(Date.now()+1000*5900),
                 httpOnly:true,
                 sameSite:'lax'
             })
@@ -100,6 +100,76 @@ const verifyToken = (req,res,next)=>{
     })
 }
 
+const refreshToken =async(req,res,next)=>{
+    const cookies = req.headers.cookie;
+    let prevToken;
+    if(typeof cookies ==='string'){
+         prevToken  = cookies.split("=")[1];//slipt headers from token
+    }
+
+    if(!prevToken){
+        res.status(400).json({message:"No Token found"})
+    }
+    jwt.verify(String(prevToken),process.env.TOKEN_PRIVATE_KEY,(err,decode)=>{
+        if(err){
+            return res.status(403).json({message:"Authentication failed"})
+        }
+
+        //after token verify
+        res.clearCookie(`${decode.id}`);
+        req.cookies[`${decode.id}`]="";//rest cookie from headers {headers is object}
+
+        //after reset cookie - Generating New Token
+
+        const newToken = jwt.sign({id:decode.id},process.env.TOKEN_PRIVATE_KEY,{
+            expiresIn:"1h",
+        })
+
+        //define new cookies
+
+        res.cookie(String(decode.id),newToken,{
+            path:"/",
+            expires: new Date(Date.now()+1000*5900),//30 sec expire
+            httpOnly:true,
+            sameSite:'lax'
+        })
+
+        req.id = decode.id;// set request header to user id which we get from decode .id 
+        next(); 
+
+
+    })}
+
+
+const logout = (req,res)=>{
+    const cookies = req.headers.cookie;
+    let prevToken;
+    if(typeof cookies ==='string'){
+         prevToken  = cookies.split("=")[1];//slipt headers from token
+    }
+
+    if(!prevToken){
+        res.status(400).json({message:"No Token found"})
+    }
+
+
+    jwt.verify(String(prevToken),process.env.TOKEN_PRIVATE_KEY,(err,decode)=>{
+        if(err){
+            return res.status(403).json({message:"Authentication failed"})
+        }
+
+        //after token verify
+        res.clearCookie(`${decode.id}`);
+        req.cookies[`${decode.id}`]="";//reset cookie from headers {headers is object}
+
+       
+
+       return res.status(200).json({message:"Successfully Logged Out"})
+
+
+    })
+}
+
 
 
 const getAdmin = async (req,res)=>{
@@ -119,6 +189,23 @@ const getAdmin = async (req,res)=>{
     return res.status(200).json({admin});
 }
 
+const getCandidate = async(req,res)=>{
+    const candidateID = req.id;
+    console.log(candidateID);
+    let candidate;
+    try{
+        candidate = await database.findAllCandidates();
+        console.log(candidate);
+    }catch(error){
+        return new Error(error);
+    }
+
+    if(!candidate){
+        return res.status(404).json({message:"Candidate  Not Found"})
+    }
+    
+    return res.status(200).json({candidate});
+}
 
 
 
@@ -131,4 +218,7 @@ module.exports = {
     adminRegistration:adminRegistration,
     getAdmin:getAdmin,
     verifyToken:verifyToken,
+    refreshToken:refreshToken,
+    logout:logout,
+    getCandidate:getCandidate,
 }
