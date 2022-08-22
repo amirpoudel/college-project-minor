@@ -38,6 +38,9 @@ router.get('/logout',adminController.verifyToken,adminController.logout);
 
 router.get('/getCandidate',adminController.verifyToken,adminController.getCandidate);
 
+//get all User
+router.get('/getUser',adminController.verifyToken,adminController.getUsers);
+
 
 
 

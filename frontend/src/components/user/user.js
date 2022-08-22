@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import axios  from 'axios'
+import React, { useEffect, useState } from 'react';
+import axios  from 'axios';
 
 import { Link} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -37,6 +37,8 @@ export default function User() {
       const res = await axios.get('/user',{
         withCredentials:true,
       }).catch(err=>console.log(err));
+
+
       const data = await res.data;
       return data;
   }
@@ -52,7 +54,10 @@ export default function User() {
   useEffect(()=>{
     if(firstRender){
       firstRender = false;
-      sendRequest().then((data)=>setUser(data.user));
+      sendRequest().then((data)=>{
+          setUser(data.user)
+
+        });
 
     }
 

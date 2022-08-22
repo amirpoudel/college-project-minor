@@ -20,6 +20,9 @@ export default function Admin() {
 
   const [candidate, setCandidate] = useState();
 
+  // user state;
+  const [user,setUser] = useState();
+
   //use state management hooks
 
   const dispatch = useDispatch()
@@ -66,7 +69,18 @@ export default function Admin() {
     const candidateData = await res.data;
     return candidateData;
 
+  }
 
+  //Send request to get all User Information
+  
+  const sendUserRequest =async ()=>{
+    const res = await axios.get('/getUser',{
+      withCredentials:true,
+    }).catch((err)=>{
+      console.log(err);
+    })
+    const userData = res.data;
+    return userData;
   }
 
 
@@ -102,6 +116,11 @@ export default function Admin() {
     })
   }
 
+  //handle User show Request
+  const handleUsers = async()=>{
+    sendUserRequest().then((data)=>{
+      setUser(data.user);
+      })}
 
 
   //use UseEffect to send request after every certain time 
@@ -136,6 +155,11 @@ export default function Admin() {
       {candidate && <h2>Candidate List</h2>}
       {candidate && candidate.map((data)=>{
         return <h3>{data.firstName} {data.lastName} {data.totalVote}</h3>
+      })}
+      <button type="button" onClick={handleUsers} >Show All Candidate</button>
+      {user && <h2>User List</h2>}
+      {user && user.map((data)=>{
+        return <h3>{data.firstName}</h3>
       })}
     </div>
   )

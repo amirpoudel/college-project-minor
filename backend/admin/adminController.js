@@ -208,6 +208,21 @@ const getCandidate = async(req,res)=>{
 }
 
 
+const getUsers = async(req,res)=>{
+    let user;
+    try{
+        user = await database.findUsers();
+        console.log(user);
+    }catch(err){
+        return new Error(err);
+    }
+    if(!user){
+        return res.status(404).json({message:"Users Not Found"});
+    }
+
+    return res.status(200).json({user});
+}
+
 
 
 
@@ -221,4 +236,5 @@ module.exports = {
     refreshToken:refreshToken,
     logout:logout,
     getCandidate:getCandidate,
+    getUsers:getUsers,
 }
