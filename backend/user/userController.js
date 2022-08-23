@@ -175,6 +175,26 @@ const getUser = async(req,res)=>{
 }
 
 
+const getCandidateForUser = async(req,res)=>{
+    let candidate;
+    try {
+        candidate = await database.findAllCandidates();
+        console.log(candidate);
+    } catch (error) {
+        return new Error(error);
+        
+    }
+
+    if(!candidate){
+        return res.status(404).json({message:"Candidate Note Found"})
+    }
+
+    return res.status(200).json({candidate});
+
+}
+
+
+
 const logout = (req,res)=>{
     const cookies = req.headers.cookie;
     let prevToken;
@@ -215,6 +235,7 @@ module.exports={
     userRegistration:userRegistration,
     verifyToken:verifyToken,
     getUser:getUser,
+    getCandidateForUser:getCandidateForUser,
     refreshToken:refreshToken,
     logout:logout,
 

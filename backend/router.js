@@ -12,7 +12,7 @@ router.get("/",(req,res)=>{
     res.send("Hello world");
 }) 
 
-
+//----------------------------------Manage All Request Coming From Admin ----------------------------------------------
 
 // //manage Admin Login
 
@@ -42,7 +42,18 @@ router.get('/getCandidate',adminController.verifyToken,adminController.getCandid
 router.get('/getUser',adminController.verifyToken,adminController.getUsers);
 
 
+//manage Candidate Registration
+router.post("/candidateRegistration",adminController.verifyToken,async(req,res)=>{
+    const data = await req.body;
 
+    database.createCandidate(data.candidateID,data.firstName,data.middleName,data.lastName,data.post);
+    console.log(data);
+    console.log(data.candidateID);
+})
+
+
+
+// ---------------------------------Manage All Request Coming From User ---------------------------------------------------
 
 
 //Manage User Registration
@@ -60,14 +71,9 @@ router.get("/refresh",userController.refreshToken,userController.verifyToken,use
 // user logout
 router.post("/logout",userController.verifyToken,userController.logout);
 
-//manage Candidate Registration
-router.post("/candidateRegistration",adminController.verifyToken,async(req,res)=>{
-    const data = await req.body;
+//get Candidate for user
+router.post("/getCandidateForUser",userController.verifyToken,userController.getCandidateForUser);
 
-    database.createCandidate(data.candidateID,data.firstName,data.middleName,data.lastName,data.post);
-    console.log(data);
-    console.log(data.candidateID);
-})
 
 
 

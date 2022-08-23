@@ -130,6 +130,13 @@ async function findAllCandidates() {
     const result = await models.candidateModel.find();
     return result;
 }
+
+// finds all candidate except total votes
+async function findAllCandidatesForUser(){
+    const result = await models.candidateModel.find();
+    return result;
+}
+
 //finds candidate by candidateID
 
 async function findCandidate(candidateID) {
@@ -178,7 +185,7 @@ async function update_candidate_vote(id){
 
 
 // update candidate votes
-
+// re-write this code - this code is shit
 async function updateCandidateVotes() {
     
     //function for find all votes
@@ -227,6 +234,7 @@ module.exports = {
     findOneUserById:findOneUserById,
     findOneAdmin:findOneAdmin,
     findOneAdminById:findOneAdminById,
+    findAllCandidatesForUser:findAllCandidatesForUser,
 
 
     //update candidate votes
