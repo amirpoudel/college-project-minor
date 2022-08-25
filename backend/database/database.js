@@ -133,7 +133,7 @@ async function findAllCandidates() {
 
 // finds all candidate except total votes
 async function findAllCandidatesForUser(){
-    const result = await models.candidateModel.find();
+    const result = await models.candidateModel.find(null,{totalVote:0 ,electionStatus:0});
     return result;
 }
 

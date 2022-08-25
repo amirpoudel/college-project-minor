@@ -32,7 +32,7 @@ const userLogin = async (req,res)=>{
         if(result === true){
             //generating token
             const token = jwt.sign({id:existingUser._id},process.env.TOKEN_PRIVATE_KEY,{
-                expiresIn:"35s",
+                expiresIn:"1h",
             })
             //if already cookies in there so  remove first 
             if(req.cookies[`${existingUser._id}`]){
@@ -41,7 +41,7 @@ const userLogin = async (req,res)=>{
           //after userLogin  storing token in httpOnly cookies 
             res.cookie(String(existingUser._id),token,{
                 path:"/",
-                expires: new Date(Date.now()+1000*30),//30 sec expire
+                expires: new Date(Date.now()+1000*6000),//30 sec expire
                 httpOnly:true,
                 sameSite:'lax'
             })
@@ -135,7 +135,7 @@ const refreshToken =async(req,res,next)=>{
         //after reset cookie - Generating New Token
 
         const newToken = jwt.sign({id:decode.id},process.env.TOKEN_PRIVATE_KEY,{
-            expiresIn:"35s",
+            expiresIn:"1h",
         })
 
         //define new cookies
