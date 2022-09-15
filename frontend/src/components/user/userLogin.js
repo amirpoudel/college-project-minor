@@ -7,10 +7,14 @@ import {useNavigate} from "react-router-dom"
 
 export default function Login(props) {
     const history = useNavigate();
+    //---------------------------------------------------------------STATE-----------------------------------------------------
     let [user,setUser] = useState({
         username:"",
         password:""
     });
+
+    //---------------------------------------------------------------Event Handling-------------------------------------------
+
     let name, value;
     let handleOnChange = (event)=>{
         name = event.target.name; // this is store name of tag in input field
@@ -18,7 +22,14 @@ export default function Login(props) {
         
         setUser({...user,[name]:value});
     }
-    
+
+
+    const handleOnClick = ()=>{
+        postData();
+        
+    }
+
+    //--------------------------------------------------------------Post Data Request Function--------------------------------
     async function postData(){
         const config = {
             method:'post',
@@ -39,10 +50,7 @@ export default function Login(props) {
         })
     }
 
-    const handleOnClick = ()=>{
-        postData();
-        
-    }
+   
     return (
         <>  
             <div className='login'>

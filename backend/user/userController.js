@@ -156,7 +156,7 @@ const refreshToken =async(req,res,next)=>{
     
 }
 
-
+//get user to checking in login 
 const getUser = async(req,res)=>{
     const userID = req.id;
     let user;
@@ -174,6 +174,7 @@ const getUser = async(req,res)=>{
     return res.status(200).json({user});
 }
 
+//get candidate details
 
 const getCandidateForUser = async(req,res)=>{
     let candidate;
@@ -194,6 +195,18 @@ const getCandidateForUser = async(req,res)=>{
 }
 
 
+//submit vote function - 
+
+const submitVote = async(req,res)=>{
+    const candidateID =await req.body.id;
+    console.log(`Hey Folks ! This is vote id ${candidateID}`);
+    console.log(typeof candidateID);
+    await database.createVote(candidateID);
+
+    return res.status(200).json({message:"Succesfully submitted vote"});
+}
+
+//logout function
 
 const logout = (req,res)=>{
     const cookies = req.headers.cookie;
@@ -238,5 +251,6 @@ module.exports={
     getCandidateForUser:getCandidateForUser,
     refreshToken:refreshToken,
     logout:logout,
+    submitVote:submitVote,
 
 }

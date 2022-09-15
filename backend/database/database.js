@@ -82,12 +82,13 @@ async function createCandidate(candidateID,firstName,middleName,lastName,post) {
 async function createVote(candidateID) {
     try {
         const vote = new models.voteModel({
-            candidateID: 541018,
+            candidateID: candidateID,
             vote: 1
         })
         await vote.save();
 
-
+        //after saving votes - update votes
+        updateCandidateVotes();
     } catch (error) {
         console.log(error);
     }

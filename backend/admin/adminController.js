@@ -170,7 +170,7 @@ const logout = (req,res)=>{
     })
 }
 
-
+//get Admin
 
 const getAdmin = async (req,res)=>{
     const adminID = req.id;
@@ -189,6 +189,7 @@ const getAdmin = async (req,res)=>{
     return res.status(200).json({admin});
 }
 
+//get candidate and details
 const getCandidate = async(req,res)=>{
     const candidateID = req.id;
     console.log(candidateID);
@@ -207,6 +208,7 @@ const getCandidate = async(req,res)=>{
     return res.status(200).json({candidate});
 }
 
+//get users aka voters
 
 const getUsers = async(req,res)=>{
     let user;

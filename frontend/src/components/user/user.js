@@ -24,7 +24,25 @@ export default function User() {
 
   const [user, setUser] = useState();
 
-  const [candidate, setCandidate] = useState();
+  const [candidate, setCandidate] = useState([]);
+
+  const [voteID,setVoteID] = useState();
+
+  //-----------------------------------Get Data From Child Component--
+
+  const getCandidateID = (id)=>{
+    setVoteID(id);
+    
+    // if(voteID){
+    //   sumbitVote();
+    // }
+    if(id){
+      sumbitVote(id);
+      console.log(`Candidate Id from Main Component ${id}`);
+    }
+    
+  }
+
 
 
   // react redux
@@ -32,6 +50,23 @@ export default function User() {
   const isLoggedIn = useSelector(state => state.isLoggedIn);
 
   //-------------------------Send Request To Backend----------------------------------------------
+
+
+
+  //Send Request To Submit Vote
+  const sumbitVote = async(id)=>{
+    const voteData = {
+      method:'post',
+      url:'/submitVote',
+      data:{id:id},
+    }
+
+    axios(voteData).then((res)=>{
+      console.log(res);
+    }).catch((err)=>{
+      console.log(err);
+    })
+  }
 
 
   //Send Request For Logout 
@@ -52,7 +87,9 @@ export default function User() {
   const sendRequest = async () => {
     const res = await axios.get('/user', {
       withCredentials: true,
-    }).catch(err => console.log(err));
+    }).catch((err)=>{
+      return err;
+    });
 
     
     const data = await res.data;
@@ -67,7 +104,9 @@ export default function User() {
   const sendCandiateRequest = async()=>{
     const res  = await axios.get('/getCandidateForUser',{
       withCredentials:true,
-    }).catch(err=>console.log(err))
+    }).catch((err)=>{
+      return err;
+    })
 
     const data = await res.data;
     
@@ -93,28 +132,41 @@ export default function User() {
     })
   }
 
+  
 
+  
 
 
 
   //-------------- Effect Hook--------------------------------- 
+
+  //useEffect for submit state value (vote) imeditatly-------
+
+  // useEffect(()=>{
+  //   sumbitVote();
+  //   console.log("vote submit from user ");
+  // },[])
 
   useEffect(() => {
     if (firstRender) {
       firstRender = false;
       
       sendRequest().then((data) => {
-    
-        setUser(data.user)
+        if(data){
+          
+          setUser(data.user)
+        }
+        
       });
 
 
+      sendCandiateRequest().then((data)=>{
+        if(data){
+          setCandidate(data.candidate);
+        }
+      })
 
-      // sendCandiateRequest().then((data)=>{
-      //   setCandidate(data.candidate);
-      // })
-    
-      
+
     }
 
     let interval = setInterval(() => {
@@ -123,12 +175,21 @@ export default function User() {
         setUser(data.user);
         
       })
-    }, 1000 * 28)
+    }, 1000 * 5800)
 
 
 
     return () => clearInterval(interval)
   }, [])
+
+
+
+
+
+   
+
+
+ 
 
 
 
@@ -143,8 +204,11 @@ export default function User() {
       {user && <h1>{user.firstName} {user.lastName} - Voter ID : {user.voterID}</h1>}
       {user && <h3>{user.email} </h3>}
 
-      {user && <VotingTable/>}
+      {user && <VotingTable candidate={candidate} getVoteID={getCandidateID}/>}
       
+      
+      
+     
 
 
 

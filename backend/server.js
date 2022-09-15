@@ -6,7 +6,7 @@ const cookieParse = require('cookie-parser')
 const router = require('./router')
 const cors = require("cors");
 const app = express();
-app.use(cors({credentials:true,origin:"http://localhost:3000"}));
+app.use(cors({credentials:true,origin:"http://localhost:3000"}));//for axios request
 app.use(cookieParse());
 app.use(express.json());
 

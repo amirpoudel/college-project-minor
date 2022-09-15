@@ -9,11 +9,18 @@ import axios from 'axios'
 
 export default function Login(props) {
     const navigate = useNavigate();
+    //--------------------------------------------------------STATE-------------------------------------------------
     let [admin,setAdmin] = useState({
         username:"",
         password:""
     });
+
+
+
+    //--------------------------------------------------------Event Handling---------------------------------------
+
     let name, value;
+
     let handleOnChange = (event)=>{
         name = event.target.name; // this is store name of tag in input field
         value = event.target.value;//this is store value of that particular field
@@ -21,6 +28,11 @@ export default function Login(props) {
         setAdmin({...admin,[name]:value});
     }
 
+
+    const handleOnClick = ()=>{
+        postData();
+    }
+    //------------------------------------------------------Post Request Function---------------------------------------
     async function postData(){
         const config = {
             method:'post',
@@ -38,9 +50,7 @@ export default function Login(props) {
         })
     }
 
-    const handleOnClick = ()=>{
-        postData();
-    }
+   
     return (
         <>  
             <div className='login'>

@@ -72,10 +72,13 @@ router.get("/refresh",userController.refreshToken,userController.verifyToken,use
 router.post("/logout",userController.verifyToken,userController.logout);
 
 //get Candidate for user
-router.post("/getCandidateForUser",userController.verifyToken,userController.getCandidateForUser);
+router.get("/getCandidateForUser",userController.verifyToken,userController.getCandidateForUser);
 
 
 
+//manage vote sumbit by user
+
+router.post("/submitVote",userController.verifyToken,userController.submitVote);
 
 
 

@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 
 export default function CandidateRegistration() {
     const history = useNavigate();
+    //--------------------------------------------------STATE-----------------------------------------------------
+    //state for candidate
     const [candidate,setCandidate]=useState({
         candidateID:"",
         firstName:"",
@@ -14,11 +16,22 @@ export default function CandidateRegistration() {
 
     })
     let name,value
+    //--------------------------------------------------Event Handling--------------------------------------------
+    //event handling
     const handleOnChange=(event)=>{
         name = event.target.name;
         value = event.target.value;
         setCandidate({...candidate,[name]:value})
     }
+
+    const handleOnClick=()=>{
+        postData().then(()=>{
+            alert("Register Success");
+            history('/admin');
+        });
+    }
+    //----------------------------------------------------Post Data Request Function-------------------------------
+    //Post Candidate Registration Data;
 
     async function postData(){
         const config={
@@ -41,12 +54,7 @@ export default function CandidateRegistration() {
         })
     }
 
-    const handleOnClick=()=>{
-        postData().then(()=>{
-            alert("Register Success");
-            history('/admin');
-        });
-    }
+   
 
   return (
     <>

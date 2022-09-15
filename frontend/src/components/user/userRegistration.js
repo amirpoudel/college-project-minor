@@ -5,6 +5,7 @@ import {useNavigate} from "react-router-dom"
 export default function UserRegistration() {
 
     const history = useNavigate();
+    //------------------------------------------------------------STATE----------------------------------------------------
     const [user,setUser]=useState({
         votingID:"",
         firstName:"",
@@ -15,12 +16,24 @@ export default function UserRegistration() {
         confirmPassword:"",
     })
 
+
+    //-------------------------------------------------------------Event Handling--------------------------------------------
+
     let name,value;
     const handleOnChange = (event)=>{
         name = event.target.name;
         value = event.target.value;
         setUser({...user,[name]:value});
     }
+
+    const handleOnClick=(event)=>{
+        event.preventDefault();
+        postData().then(()=>{
+            history("/admin");
+        });
+    }
+
+    //----------------------------------------------------------Post Request Function--------------------------------------------
 
     async function postData(){
         const config={
@@ -44,12 +57,7 @@ export default function UserRegistration() {
         })
     }
 
-    const handleOnClick=(event)=>{
-        event.preventDefault();
-        postData().then(()=>{
-            history("/admin");
-        });
-    }
+   
 
 
 
