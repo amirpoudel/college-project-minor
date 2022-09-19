@@ -88,7 +88,9 @@ async function createVote(candidateID) {
         await vote.save();
 
         //after saving votes - update votes
-        updateCandidateVotes();
+        //updateCandidateVotes();--logical error- old votes are also counting
+        update_candidate_vote(candidateID);
+
     } catch (error) {
         console.log(error);
     }
@@ -186,36 +188,36 @@ async function update_candidate_vote(id){
 
 
 // update candidate votes
-// re-write this code - this code is shit
-async function updateCandidateVotes() {
+// re-write this code - this code is shit -- logical error - Every Time while iterate votes - old votes are also counting 
+// async function updateCandidateVotes() {
     
-    //function for find all votes
-    async function allVotes() {
-        const result = await findAllVotes();
-        return result;
+//     //function for find all votes
+//     async function allVotes() {
+//         const result = await findAllVotes();
+//         return result;
 
-    }
-    //find Onecandidate
-    async function oneCandidate(candidateID){
-        const result = await findCandidate(candidateID);
-        return result;
-    }
+//     }
+//     //find Onecandidate
+//     async function oneCandidate(candidateID){
+//         const result = await findCandidate(candidateID);
+//         return result;
+//     }
 
-    const totalVotes = await allVotes();
-    //console.log(totalVotes)
-   ;
+//     const totalVotes = await allVotes();
+//     //console.log(totalVotes)
+//    ;
    
-    totalVotes.forEach( async function(vote){
-        console.log(vote.candidateID);
-        //const candidate =  oneCandidate(vote.candidate);
-        //console.log(candidate.candidateID);
+//     totalVotes.forEach( async function(vote){
+//         console.log(vote.candidateID);
+//         //const candidate =  oneCandidate(vote.candidate);
+//         //console.log(candidate.candidateID);
         
-       await update_candidate_vote(vote.candidateID);
-        // console.log(candidate.candidateID);
+//        await update_candidate_vote(vote.candidateID);
+//         // console.log(candidate.candidateID);
        
-    })
+//     })
     
-}
+// }
 
 module.exports = {
     //function for inserting data
@@ -239,6 +241,6 @@ module.exports = {
 
 
     //update candidate votes
-    updateCandidateVotes:updateCandidateVotes,
+  ///  updateCandidateVotes:updateCandidateVotes,
 
 }
