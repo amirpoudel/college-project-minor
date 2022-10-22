@@ -28,8 +28,9 @@ export default function AdminRegistration() {
         }
 
         axios(config).then(function(res){
-            console.log(res);
             
+            console.log(res);
+            alert("Admin Registration Succesfull go back to Admin Login Page.")
             
    
         }).catch(function(err){
@@ -48,7 +49,8 @@ export default function AdminRegistration() {
 
     return (
         <>
-            <div className='registration'>
+            <div id='registration'>
+            <div id='registrationFrom'>
             <div>Registration For Admin</div>
             <label htmlFor="firstName">First name:</label>
             <br />
@@ -75,6 +77,7 @@ export default function AdminRegistration() {
             <input type="password" id="confirmPassword" name="confirmPassword" value={admin.confirmPassword} onChange={handleOnChange}/>
             <br />
             <button type="submit" defaultValue="Submit" onClick={handleOnClick} >Submit</button>
+            </div>
             </div>
             
 

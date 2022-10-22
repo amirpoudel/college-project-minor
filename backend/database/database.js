@@ -5,8 +5,8 @@ require("dotenv").config();
 
 const password = process.env.DB_PASSWORD;
 const user = process.env.DB_USERNAME;
-const url = `mongodb+srv://${user}:${password}@cluster0.azv1xi6.mongodb.net/?retryWrites=true&w=majority`;
-
+//const url = `mongodb+srv://${user}:${password}@cluster0.azv1xi6.mongodb.net/?retryWrites=true&w=majority`;
+const url = 'mongodb://localhost:27017/'
 
 function connectDatabase() {
 

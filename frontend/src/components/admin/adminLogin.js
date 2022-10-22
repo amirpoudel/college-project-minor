@@ -53,7 +53,8 @@ export default function Login(props) {
    
     return (
         <>  
-            <div className='login'>
+        <div id='login'>
+            <div id='loginForm'>
                 <h3>Admin Login</h3>
                 <label htmlFor="username">Username:</label>
                 <input type="email" id="username" name="username" value={admin.username} onChange={handleOnChange}/>
@@ -65,6 +66,7 @@ export default function Login(props) {
                 <br />
                 <button type="submit" defaultValue="Submit" onClick={handleOnClick} >Submit</button>
 
+            </div>
             </div>
         </>
     )

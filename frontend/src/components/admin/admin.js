@@ -52,9 +52,14 @@ export default function Admin() {
     }).catch((err) => {
       console.log(err);
     })
-
-    const data = await res.data;
-    return data;
+    if(res){
+      const data = await res.data;
+      console.log(data);//testing coddeee 
+      return data;
+    }else{
+      return null;
+    }
+    
 
   }
 
@@ -66,8 +71,13 @@ export default function Admin() {
       console.log(err);
     })
 
-    const candidateData = await res.data;
-    return candidateData;
+    if(res){
+      const candidateData = await res.data;
+      return candidateData;
+    }else{
+      return null;
+    }
+    
 
   }
 
@@ -79,8 +89,13 @@ export default function Admin() {
     }).catch((err)=>{
       console.log(err);
     })
-    const userData = res.data;
+    if(res){
+      const userData = res.data;
     return userData;
+    }else{
+      return null;
+    }
+    
   }
 
 
@@ -111,15 +126,20 @@ export default function Admin() {
   //handle candidate show request
   const handleCandidate = async () => {
     sendCandidateRequest().then((data) => {
+      if(data){
+        setCandidate(data.candidate);
+      }
       
-      setCandidate(data.candidate);
     })
   }
 
   //handle User show Request
   const handleUsers = async()=>{
     sendUserRequest().then((data)=>{
-      setUser(data.user);
+      if(data){
+        setUser(data.user);
+      }
+      
       })}
 
 
@@ -129,8 +149,11 @@ export default function Admin() {
     if (firstRender) {
       firstRender = false;
       sendRequest().then((data) => {
-
-        setAdmin(data.admin);
+        if(data){
+          setAdmin(data.admin);
+          console.log(data.admin)
+        }
+        
       })
     }
     let interval = setInterval(() => {
@@ -148,9 +171,10 @@ export default function Admin() {
     <div>
       <h1>Welcome To Admin Page</h1>
       <Link onClick={handleLogOut} to='/'>Log Out</Link>
-      {admin && <h1>{admin.firstName}</h1>}
       {admin && <Link to='/userRegistration'>User Registration</Link>}<br />
       {admin && <Link to='/candidateRegistration'>Candidate Registration</Link>}<br />
+      {admin && <h1>{admin.firstName}</h1>}
+     
       <button type="button" onClick={handleCandidate} >Show All Candidate</button>
       {candidate && <h2>Candidate List</h2>}
       {candidate && candidate.map((data)=>{
