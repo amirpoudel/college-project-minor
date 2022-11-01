@@ -47,14 +47,14 @@ export default function VotingTable({ candidate ,getVoteID}) {
     <>
 
       <div>voting Table</div>
-      {candidate && candidate.map((data) => {
+      {/* {candidate && candidate.map((data) => {
         return <div><h3>{data.candidateID} {data.firstName} {data.lastName} {data.post}   <button type='submit'>Vote</button></h3> </div>
 
 
 
 
 
-      })}
+      })} */}
       <DataTable columns={columns} data={candidate} highlightOnHover/>
 
       

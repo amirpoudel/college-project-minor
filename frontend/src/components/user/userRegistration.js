@@ -29,7 +29,7 @@ export default function UserRegistration() {
     const handleOnClick=(event)=>{
         event.preventDefault();
         postData().then(()=>{
-            history("/admin");
+            alert("User Registration Success");
         });
     }
 
@@ -62,7 +62,8 @@ export default function UserRegistration() {
 
 
     return (<>
-        <div className='registration'>
+    <div id='registration'>
+        <div id='registrationForm'>
             <div>User  Registration</div>
             <label htmlFor="votingID">Voting ID:</label>
             <br />
@@ -93,6 +94,8 @@ export default function UserRegistration() {
             <input type="password" id="confirmPassword" name="confirmPassword" value={user.confirmPassword} onChange={handleOnChange} />
             <br />
             <button type="submit" defaultValue="Submit" onClick={handleOnClick} >Submit</button>
+        </div>
+
         </div>
 
 

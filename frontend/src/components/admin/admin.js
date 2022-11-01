@@ -170,7 +170,7 @@ export default function Admin() {
   return (
     <div>
       <h1>Welcome To Admin Page</h1>
-      <Link onClick={handleLogOut} to='/'>Log Out</Link>
+      <Link onClick={handleLogOut} to='/'>Log Out</Link><br/>
       {admin && <Link to='/userRegistration'>User Registration</Link>}<br />
       {admin && <Link to='/candidateRegistration'>Candidate Registration</Link>}<br />
       {admin && <h1>{admin.firstName}</h1>}
