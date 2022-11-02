@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+* > * {
+  font-family: "Poppins", cursive;
+  margin: 0;
+}
+a {
+  text-decoration: none;
+  color: #000;
+}
+body {
+  background: linear-gradient(to bottom left, #cefced, #ecfff9);
+}
+
+.App {
+  height: 95vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}

@@ -2,6 +2,7 @@
 import React,{useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import './adminLogin.css';
+import sideImage from '../../Images/adminSideImage.png'
 
 import axios from 'axios'
 
@@ -53,7 +54,7 @@ export default function Login(props) {
    
     return (
         <>  
-        <div id='login'>
+        {/* <div id='login'>
             <div id='loginForm'>
                 <h3>Admin Login</h3>
                 <label htmlFor="username">Username:</label>
@@ -67,7 +68,62 @@ export default function Login(props) {
                 <button type="submit" defaultValue="Submit" onClick={handleOnClick} >Submit</button>
 
             </div>
+            </div> */}
+
+
+<section>
+      <div className="register">
+        <div className="col-1">
+          <img src={sideImage} alt="Voting" id="sideImageAdmin" />
+        </div>
+        <div className="col-2">
+          <h2>Admin</h2>
+          <span>Login with username and password</span>
+          <div id="form" className="flex flex-col">
+            <div className="inputContainer">
+              <label htmlFor="username" className="labelPosition">
+                Username
+              </label>
+              <input
+                type="email"
+                id="username"
+                name="username"
+                value={admin.username}
+                onChange={handleOnChange}
+                required
+              />
             </div>
+
+            <div className="inputContainer">
+              <label htmlFor="password" className="labelPosition">
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={admin.password}
+                onChange={handleOnChange}
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              className="btn"
+              defaultValue="Submit"
+              onClick={handleOnClick}
+            >
+              Submit
+            </button>
+            {/* <p className="setPassword">
+              Register Account,
+              {/* <Link to="/adminregistration">Click Here</Link>
+            </p> */}
+          </div>
+        </div>
+      </div>
+    </section>
+
         </>
     )
 }

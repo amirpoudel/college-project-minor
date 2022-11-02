@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios'
 import { useNavigate } from "react-router-dom"
 import { Link } from "react-router-dom";
+import sideImage from "../../Images/userSideImage.png"
 
 export default function Login(props) {
   const history = useNavigate();
@@ -57,12 +58,12 @@ export default function Login(props) {
 
   return (
     <>
-      <div id='login'>
+      {/* <div id='login'> */}
         {/* <div id='imageDiv'>
           <img src={loginVote} id="loginImg" alt="online voting image" />
 
         </div> */}
-        <div id='loginForm'>
+        {/* <div id='loginForm'>
           <h3>{props.title} Login</h3>
           <label htmlFor="username">Username</label><br/>
           <input type="email" id="username" name="username" value={user.username} onChange={handleOnChange} />
@@ -76,22 +77,27 @@ export default function Login(props) {
 
         </div>
 
-      </div>
+      </div> */}
 
-      {/* <section>
+
+<section>
       <div className="register">
+        {/* <div id='imageDiv'>
+          <img src={loginVote} id="loginImg" alt="online voting image" />
+        </div> */}
         <div className="col-1">
-          <img src={bgimg} alt="Voting" id="sideImageUser" />
+          <img src={sideImage} alt="Voting" id="sideImageUser" />
         </div>
         <div className="col-2">
-          <h2>Login</h2>
+          <h2>User Login</h2>
           <span>Login with your given username and password</span>
-         
+          <div id="form" className="flex flex-col">
             <div className="inputContainer">
-              <label className="labelPosition">Email</label>
+              <label htmlFor="username" className="labelPosition">
+                Username
+              </label>
               <input
                 type="email"
-                placeholder="Email"
                 id="username"
                 name="username"
                 value={user.username}
@@ -100,26 +106,32 @@ export default function Login(props) {
               />
             </div>
             <div className="inputContainer">
-              <label className="labelPosition">Password</label>
+              <label htmlFor="password" className="labelPosition">
+                Password
+              </label>
               <input
                 type="password"
-                placeholder="Password"
+                id="password"
                 name="password"
                 value={user.password}
                 onChange={handleOnChange}
                 required
               />
             </div>
-
-            
-            <button type="submit" defaultValue="Submit" className="btn" onClick={handleOnClick} >Log In</button>
-          
-          <p className="setPassword">
-            Set Password, <Link to="/userchangepassword">Click here</Link>
-          </p>
+            <button
+              type="submit"
+              className="btn"
+              defaultValue="Submit"
+              onClick={handleOnClick}
+            >
+              Login
+            </button>
+          </div>
         </div>
       </div>
-    </section> */}
+    </section>
+
+
     </>
   )
 }
