@@ -8,7 +8,7 @@
      background-color: rgb(17, 33, 65);
 } */
 
-#registration{
+/* #registration{
     width: 100vw;
     height: 100vh;
     background : linear-gradient(rgba(0,0,0,0.5),rgb(0,0,0,0.5)), url('../../Images/loginVote.jpg');
@@ -16,15 +16,7 @@
     background-size: cover;
     background-repeat: none;
     position: relative;
-
-    
-    
-  
    
-    
-   
-    
-    
 }
 
 
@@ -74,4 +66,16 @@ button:hover{
     border-radius: 10px;
     
 
-}
+} */
+
+
+#sideImageCandidate {
+    width: 500px;
+    height: 100%;
+    object-fit: cover;
+    align-self: flex-end;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 5px;
+    border-radius: 8px 0 0 8px;
+    box-shadow: 1px 0 2px 1px #ecfff9;
+  }

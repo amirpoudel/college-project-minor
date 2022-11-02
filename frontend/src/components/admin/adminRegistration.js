@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import './adminRegistration.css'
 import axios from 'axios'
+import sideImage from '../../Images/adminSideImage.png'
 
 export default function AdminRegistration() {
     const [admin, setAdmin] = useState({
@@ -49,7 +50,7 @@ export default function AdminRegistration() {
 
     return (
         <>
-            <div id='registration'>
+            {/* <div id='registration'>
                 <div id='registrationForm'>
                     <div>Registration For Admin</div>
                     <label htmlFor="firstName">First name:</label>
@@ -78,7 +79,110 @@ export default function AdminRegistration() {
                     <br />
                     <button type="submit" defaultValue="Submit" onClick={handleOnClick} >Submit</button>
                 </div>
+            </div> */}
+
+
+<div className="register">
+        <div className="col-1">
+          <img src={sideImage} alt="Voting" id="sideImageAdmin" />
+        </div>
+        <div className="col-2">
+          <h2>Admin Registration</h2>
+          <span>Create Admin Account</span>
+          <div id="form" className="flex flex-col">
+            <div className="inputContainer">
+              <label htmlFor="firstName" className="labelPosition">
+                First name:
+              </label>
+              <input
+                type="text"
+                id="firstName"
+                name="firstName"
+                value={admin.firstName}
+                onChange={handleOnChange}
+                required
+              />
             </div>
+            <div className="inputContainer">
+              <label htmlFor="middleName" className="labelPosition">
+                Middle name:
+              </label>
+
+              <input
+                type="text"
+                id="middleName"
+                name="middleName"
+                value={admin.middleName}
+                onChange={handleOnChange}
+              />
+            </div>
+            <div className="inputContainer">
+              <label htmlFor="lastName" className="labelPosition">
+                Last name:
+              </label>
+
+              <input
+                type="text"
+                id="lastName"
+                name="lastName"
+                value={admin.lastName}
+                onChange={handleOnChange}
+              />
+            </div>
+            <div className="inputContainer">
+              <label htmlFor="email" className="labelPosition">
+                Email:
+              </label>
+
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={admin.email}
+                onChange={handleOnChange}
+                required
+              />
+            </div>
+            <div className="inputContainer">
+              <label htmlFor="password" className="labelPosition">
+                Password:
+              </label>
+
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={admin.password}
+                onChange={handleOnChange}
+                required
+              />
+            </div>
+            <div className="inputContainer">
+              <label htmlFor="confirmPassword" className="labelPosition">
+                Confirm Password:
+              </label>
+
+              <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                value={admin.confirmPassword}
+                onChange={handleOnChange}
+                required
+              />
+            </div>
+
+            <button
+              type="submit"
+              defaultValue="Submit"
+              className="btn"
+              onClick={handleOnClick}
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      </div>
 
 
 
