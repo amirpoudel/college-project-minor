@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { authActions } from '../../store';
-
+import './user.css'
 
 import VotingTable from './votingTable';
 
@@ -195,18 +195,21 @@ export default function User() {
 
 
   return (
+
     <>
-      <div>Welcome To Online Voting System ! Vote Your Fav Candidate!
-        <Link onClick={handleLogOut} to='/'>Log Out</Link>
+    <div id='user'>
+      <div id="welcomeText" >Welcome To Online Voting System !<br/> <span>Vote Your Fav Candidate!</span>
+        
       </div>
+      <div id='logOut'><button><Link onClick={handleLogOut} to='/'>Log Out</Link> </button></div>
 
 
       {user && <h1>{user.firstName} {user.lastName} - Voter ID : {user.voterID}</h1>}
-      {user && <h3>{user.email} </h3>}
+      {user && <h3>username - {user.email} </h3>}
 
       {user && <VotingTable candidate={candidate} getVoteID={getCandidateID}/>}
       
-      
+      </div>
       
      
 

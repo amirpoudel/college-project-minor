@@ -1,0 +1,28 @@
+#admin{
+    
+    
+    width: 90vw;
+}
+
+#logOut{
+    
+    margin-left: 70%;
+}
+
+#registrationButton{
+    
+    margin-right: 70%;
+
+    
+}
+
+#registrationButton button{
+    margin-left: 30px;
+}
+
+#voteTable{
+    margin-top: 10px;
+}
+#userTable{
+    margin-top: 20px;
+}
